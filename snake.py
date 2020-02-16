@@ -8,6 +8,11 @@ class Snake:
 
     def __init__(self, x, y):
         self.body = []
+
+        # Start snake with 4 body parts
+        for i in reversed(range(1,5)):
+            self.body.append((x, y+i))
+
         self.new_body = False
         self.x = x
         self.y = y
