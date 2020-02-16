@@ -2,6 +2,7 @@ from constants import *
 import random
 import pygame
 
+
 class Food:
 
     def __init__(self):
@@ -14,7 +15,7 @@ class Food:
         self.y = random.randrange(NUM_Y_GRID)
 
     def draw(self, win):
-        pygame.draw.rect(win, [0,255,0], (self.x * X_GRID_SIZE, self.y * Y_GRID_SIZE, X_GRID_SIZE, Y_GRID_SIZE))
+        pygame.draw.rect(win, [0, 255, 0], (self.x * X_GRID_SIZE, self.y * Y_GRID_SIZE, X_GRID_SIZE, Y_GRID_SIZE))
 
     def collide(self, snake):
         if snake.x == self.x and snake.y == self.y:

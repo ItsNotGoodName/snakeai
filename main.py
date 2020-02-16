@@ -6,7 +6,7 @@ from snake import Snake
 
 
 def main():
-    win=pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
+    win = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
     clock = pygame.time.Clock()
     snake = Snake(10, 10)
     food = Food()
@@ -31,6 +31,7 @@ def main():
             quit()
 
         board.draw(win)
+
 
 if __name__ == "__main__":
     main()

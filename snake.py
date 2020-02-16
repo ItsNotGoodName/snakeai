@@ -37,8 +37,8 @@ class Snake:
     def update_board(self, board):
         for b in self.body:
             x, y = b
-            board[y][x] = SNAKEBODY_NUM
-        board[y][x] = SNAKEHEAD_NUM
+            board[y][x] = SNAKE_BODY_NUM
+        board[y][x] = SNAKE_HEAD_NUM
 
     def move_left(self):
         self.move_ind -= 1
