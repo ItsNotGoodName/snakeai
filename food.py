@@ -5,10 +5,12 @@ import pygame
 
 class Food:
 
-    def __init__(self):
-        self.x = 0
-        self.y = 0
-        self.move_random()
+    def __init__(self, x=None, y=None):
+        if x is None and y is None:
+            self.move_random()
+        else:
+            self.x = x
+            self.y = y
 
     def move_random(self):
         self.x = random.randrange(NUM_X_GRID)

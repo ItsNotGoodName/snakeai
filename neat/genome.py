@@ -1,0 +1,4 @@
+class Genome:
+    connection = []
+    nodes = []
+    

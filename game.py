@@ -2,12 +2,12 @@ import pygame
 from constants import *
 
 
-class Board:
+class Game:
     """
-        0 = nothing
-        1 = snake-head
-        2 = snake-body
-        3 = food
+        0 = wall/body
+        2 = snake-head
+        3 = nothing
+        4 = food
     """
 
     def __init__(self, snake, food):
@@ -25,22 +25,17 @@ class Board:
         self.right = False
         # --------------------------------------------------------------------------------------------------------------
 
+    def game_over(self):
+        return self.snake.is_dead()
+
     def update_board(self):
         self.snake.update_board(self.board)
 
     def tick(self):
-        # Key checking
-        # --------------------------------------------------------------------------------------------------------------
-        if self.left:
-            self.snake.move_left()
-            self.left = False
-        if self.right:
-            self.snake.move_right()
-            self.right = False
-        # --------------------------------------------------------------------------------------------------------------
         self.snake.tick()
         if self.food.collide(self.snake):
             self.snake.grow()
+            self.snake.eat()
             self.food.move_random()
 
     def draw(self, win):
@@ -49,10 +44,28 @@ class Board:
         self.food.draw(win)
         pygame.display.update()
 
+    # Rest key presses
+    # ------------------------------------------------------------------------------------------------------------------
+    def reset_input(self):
+        self.left = False
+        self.right = False
+
     # Key press handling
     # ------------------------------------------------------------------------------------------------------------------
     def handle_user_input(self, key):
-        if key == pygame.K_LEFT:
+        if key == pygame.K_LEFT and self.left is False:
+            self.snake.move_left()
             self.left = True
-        elif key == pygame.K_RIGHT:
+        elif key == pygame.K_RIGHT and self.right is False:
+            self.snake.move_right()
             self.right = True
+    # Key press handling
+    # ------------------------------------------------------------------------------------------------------------------
+    def snake_key_check(self):
+        if self.left:
+            self.snake.move_left()
+            self.left = False
+        if self.right:
+            self.snake.move_right()
+            self.right = False
+    # ------------------------------------------------------------------------------------------------------------------

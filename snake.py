@@ -7,13 +7,13 @@ class Snake:
     MOVE_MATRIX = [(0, -1), (1, 0), (0, 1), (-1, 0)]
     MOVE_MATRIX_LEN = len(MOVE_MATRIX)
 
-    def __init__(self, x, y):
+    def __init__(self, x: object, y: object) -> object:
         self.body = []
-
+        self.hunger = 200
         # Start snake with 4 body parts
         for i in reversed(range(1,5)):
             self.body.append((x, y+i))
-
+        self.olddist = 10000
         self.new_body = False
         self.x = x
         self.y = y
@@ -34,6 +34,10 @@ class Snake:
 
         self.x += x_vel
         self.y += y_vel
+        self.hunger -= 1
+
+    def eat(self):
+        self.hunger += 50
 
     def update_board(self, board):
         for b in self.body:
@@ -48,7 +52,7 @@ class Snake:
         self.move_ind = (self.move_ind + 1) % self.MOVE_MATRIX_LEN
 
     def is_dead(self):
-        if (self.x, self.y) in self.body or self.x >= NUM_X_GRID or self.x < 0 or self.y >= NUM_Y_GRID or self.y < 0:
+        if self.hunger < 0 or (self.x, self.y) in self.body or self.x >= NUM_X_GRID or self.x < 0 or self.y >= NUM_Y_GRID or self.y < 0:
             return True
         return False
 
@@ -71,3 +75,5 @@ class Snake:
         straight = ret[self.move_ind]
 
         return (left, straight, right)
+
+
